@@ -265,4 +265,8 @@
         font-weight:bold;
         text-align: center;
     }
+    .bigbox-container{
+        display: grid;
+        grid-gap: 20px;
+    }
 }
