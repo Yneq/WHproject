@@ -1,11 +1,6 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0;
-    padding-top: 0px;
 }
-
 .container {
     display: flex;
     flex-direction: column;
@@ -37,6 +32,10 @@ h1 {
     padding: 5px;
     margin-bottom: 20px;
 }
+.cal-button {
+    margin-top: 10px;
+    padding: 5px;
+}
 .input {
     display: flex;
     align-items: center;
@@ -48,4 +47,13 @@ h1 {
 }
 .chekck-in {
     font-weight: bold;
+}
+.calcheck-in {
+    font-weight: bold;
+    margin-top: 30px;
+
+}
+.calculate {
+    border-top: #b6b1b1 2px solid;
+    margin-top: 10px;
 }
