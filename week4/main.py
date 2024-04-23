@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Form, Query
 import uvicorn
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -22,12 +22,12 @@ def read_root(request: Request):
 @app.post("/signin")
 def signin(request: Request, username: str=Form(default=None), password: str=Form(default=None)):
     if not username or not password:
-        return templates.TemplateResponse("emptyerrorpage.html", {"request": request})
+        return RedirectResponse(url="/emptyerrorpage?message=請輸入帳號或密碼",status_code=303)
     if username == "test" and password == "test":
         request.session["SIGNED_IN"] = True
         return RedirectResponse(url="/member",status_code=303) #引導使用get方法
     else:
-        return templates.TemplateResponse("errorpage.html", {"request": request})
+        return RedirectResponse(url="/errorpage?message=帳號、或密碼輸入錯誤", status_code=303)
 
 
 @app.get("/member")
@@ -38,12 +38,12 @@ def member(request: Request):
         return RedirectResponse(url="/")
 
 @app.get("/errorpage")
-def errorpage(request: Request):
-    return templates.TemplateResponse("errorpage.html", {"request": request})
+def errorpage(request: Request, message: str=Query(None)):
+    return templates.TemplateResponse("errorpage.html", {"request": request, "message": message})
 
 @app.get("/emptyerrorpage")
-def emptyerrorpage(request: Request):
-    return templates.TemplateResponse("emptyerrorpage.html", {"request": request})
+def emptyerrorpage(request: Request, message: str=Query(None)):
+    return templates.TemplateResponse("emptyerrorpage.html", {"request": request, "message": message})
 
 @app.get("/signout")
 def signout(request: Request):
