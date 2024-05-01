@@ -68,7 +68,7 @@
 
 ● SELECT all messages, including sender names, where sender username equals to test. We have to JOIN the member table to filter and get that.
 
-![截圖 2024-05-01 下午2 03 23](https://github.com/Yneq/WHproject/assets/149919747/0c880358-d64f-4f57-899d-2ba92c1bab4c)
+![截圖 2024-05-01 下午2 16 03](https://github.com/Yneq/WHproject/assets/149919747/51afe22e-b9f2-47d3-a31b-da98dedcecec)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 
