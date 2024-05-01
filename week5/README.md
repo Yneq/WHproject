@@ -68,11 +68,11 @@
 
 ● SELECT all messages, including sender names, where sender username equals to test. We have to JOIN the member table to filter and get that.
 
-![截圖 2024-05-01 上午11 19 57](https://github.com/Yneq/WHproject/assets/149919747/a22c4c88-58f5-4aee-955e-608aaa47affc)
+![截圖 2024-05-01 下午2 03 23](https://github.com/Yneq/WHproject/assets/149919747/0c880358-d64f-4f57-899d-2ba92c1bab4c)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 
-![截圖 2024-05-01 上午11 22 03](https://github.com/Yneq/WHproject/assets/149919747/eae45ee3-49d2-4f3f-9f92-0b71124cbabb)
+![截圖 2024-05-01 下午2 07 21](https://github.com/Yneq/WHproject/assets/149919747/b583ec48-7612-4219-acc1-cfe33daae8fb)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username.
 
