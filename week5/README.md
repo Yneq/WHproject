@@ -72,7 +72,7 @@
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages where sender username equals to test.
 
-![截圖 2024-05-01 下午2 07 21](https://github.com/Yneq/WHproject/assets/149919747/b583ec48-7612-4219-acc1-cfe33daae8fb)
+![截圖 2024-05-01 下午2 18 55](https://github.com/Yneq/WHproject/assets/149919747/acc23305-c41e-45b7-9f18-1eb5ba6e0321)
 
 ● Use SELECT, SQL Aggregation Functions with JOIN statement, get the average like count of messages GROUP BY sender username.
 
