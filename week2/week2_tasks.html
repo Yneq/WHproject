@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+</head>
+<body>
+    <script>
+function findAndPrint(messages, currentStation){
+    const greenLine = ["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjiang Nanjing", "Zhongshan", 
+                           "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-shek Memorial Hall", "Guting", "Taipower Building",
+                           "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"];
+        
+    const stationIndex = {};
+    greenLine.forEach((station, idx) => stationIndex[station] = idx);
+
+    if (!greenLine.includes(currentStation) && currentStation !== "Xiaobitan"){
+        console.log("No Station");
+        return "No Station";
+    }
+
+    let minDistance = Infinity;
+    let nearestFriend = null;
+    const friendStations = {};
+
+    Object.entries(messages).forEach(([friend, friendStation]) => {
+        if (friendStation.includes("Xiaobitan")) {
+            friendStations[friend] = (currentStation === "Xindian City Hall" || currentStation === "Xindian") ? 15.5 : 16.5;
+        } else {
+            greenLine.some((station) => {
+                if (friendStation.includes(station)) {
+                    friendStations[friend] = stationIndex[station];
+                    return true;
+                }
+                return false;
+            });
+        }
+    });
+    
+    Object.entries(friendStations).forEach(([friend, stationIdx]) => {
+        const distance = Math.abs(stationIndex[currentStation] - stationIdx);
+        if(distance < minDistance) {
+            minDistance = distance;
+            nearestFriend = friend;
+        }
+    })
+    console.log(nearestFriend);
+    return nearestFriend;
+
+
+}
+const messages={
+    "Bob":"I'm at Ximen MRT station.",
+    "Mary":"I have a drink near Jingmei MRT station.",
+    "Copper":"I just saw a concert at Taipei Arena.",
+    "Leslie":"I'm at home near Xiaobitan station.",
+    "Vivian":"I'm at Xindian station waiting for you."
+    };
+
+findAndPrint(messages, "Wanlong"); // print Mary
+findAndPrint(messages, "Songshan"); // print Copper
+findAndPrint(messages, "Qizhang"); // print Leslie
+findAndPrint(messages, "Ximen"); // print Bob
+findAndPrint(messages, "Xindian City Hall"); // print Vivian
+
+console.log("=====================")
+
+
+const bookings = {};
+        let available = function(consultantName, hour, duration) {
+            if (bookings[consultantName]) {
+                for (let i=0; i<bookings[consultantName].length; i++) {
+                    const [start, end] = bookings[consultantName][i];
+                    if(!(hour >= end || (hour + duration) <= start )) {
+                        return false;
+                    }            
+                }
+            }
+            return true;
+        }
+
+        function book(consultants, hour, duration, criteria) {
+            let bestConsultant = null;
+            let bestValue = criteria === 'price' ? Infinity : 0;
+
+            consultants.forEach(consultant => {
+                if (available(consultant.name, hour, duration)) {
+                    if (criteria === 'price' && consultant.price < bestValue) {
+                        bestConsultant = consultant.name;
+                        bestValue = consultant.price;
+                    } else if (criteria === 'rate' && consultant.rate > bestValue) {
+                        bestConsultant = consultant.name;
+                        bestValue = consultant.rate;
+                    }
+                }
+            });
+            if (bestConsultant) {
+                if (!bookings[bestConsultant]) {
+                    bookings[bestConsultant]=[];
+                }
+                bookings[bestConsultant].push([hour,hour+duration]);
+                console.log(bestConsultant);
+                return bestConsultant;
+                
+            } else console.log('No service');
+            return 'No Service'
+            
+        
+        }
+    const consultants=[
+        {"name":"John", "rate":4.5, "price":1000},
+        {"name":"Bob", "rate":3, "price":1200},
+        {"name":"Jenny", "rate":3.8, "price":800}
+    ];
+    book(consultants, 15, 1, "price"); // Jenny 
+    book(consultants, 11, 2, "price"); // Jenny 
+    book(consultants, 10, 2, "price"); // John 
+    book(consultants, 20, 2, "rate"); // John 
+    book(consultants, 11, 1, "rate"); // Bob 
+    book(consultants, 11, 2, "rate"); // No Service 
+    book(consultants, 14, 3, "price"); // John
+
+
+console.log("===========================")
+
+function func(...data){
+    const middleNames = {};
+    data.forEach (name => {
+        const parts = name.split(''); //記得中間沒有空隔，在這裡debug好久Q
+        let middleName ='';
+        
+        if (parts.length === 2){
+            middleName = parts[1];
+        } else if (parts.length === 3 || parts.length === 4){
+            middleName = parts[parts.length - 2];    
+        } else {
+            middleName = parts[2];
+        }
+        if (!(middleName in middleNames)){
+        middleNames[middleName] = name;
+        } else {
+            delete middleNames[middleName];
+        }
+    });
+    const remainingName = Object.values(middleNames);
+    remainingName.length > 0 ? console.log(remainingName[0]) : console.log("沒有");
+
+    }
+
+    func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
+    func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花 
+    func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有 
+    func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+
+
+
+console.log("===================================")
+
+
+function getNumber(index){
+            if (typeof getNumber.numbList === 'undefined'){
+                getNumber.numbList = [0];
+            }
+            while (getNumber.numbList.length <= index){
+                
+                if ((getNumber.numbList.length % 3 === 0)) {
+                    nextNumber = getNumber.numbList[getNumber.numbList.length-1] - 1;
+                } else {
+                    nextNumber = getNumber.numbList[getNumber.numbList.length-1] + 4;
+                }
+                getNumber.numbList.push(nextNumber);
+            }
+            console.log(getNumber.numbList[index]);
+            }
+            
+        getNumber(1); // print 4
+        getNumber(5); // print 15
+        getNumber(10); // print 25
+        getNumber(30); // print 70
+
+
+    </script>
+</body>
+</html>

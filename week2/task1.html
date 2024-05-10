@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task1</title>
+</head>
+<body>
+    <script>
+function findAndPrint(messages, currentStation){
+    const greenLine = ["Songshan", "Nanjing Sanmin", "Taipei Arena", "Nanjing Fuxing", "Songjiang Nanjing", "Zhongshan", 
+                           "Beimen", "Ximen", "Xiaonanmen", "Chiang Kai-shek Memorial Hall", "Guting", "Taipower Building",
+                           "Gongguan", "Wanlong", "Jingmei", "Dapinglin", "Qizhang", "Xindian City Hall", "Xindian"];
+        
+    const stationIndex = {};
+    greenLine.forEach((station, idx) => stationIndex[station] = idx);
+
+    if (!greenLine.includes(currentStation) && currentStation !== "Xiaobitan"){
+        console.log("No Station");
+        return "No Station";
+    }
+
+    let minDistance = Infinity;
+    let nearestFriend = null;
+    const friendStations = {};
+
+    Object.entries(messages).forEach(([friend, friendStation]) => {
+        if (friendStation.includes("Xiaobitan")) {
+            friendStations[friend] = (currentStation === "Xindian City Hall" || currentStation === "Xindian") ? 15.5 : 16.5;
+        } else {
+            greenLine.some((station) => {
+                if (friendStation.includes(station)) {
+                    friendStations[friend] = stationIndex[station];
+                    return true;
+                }
+                return false;
+            });
+        }
+    });
+    
+    Object.entries(friendStations).forEach(([friend, stationIdx]) => {
+        const distance = Math.abs(stationIndex[currentStation] - stationIdx);
+        if(distance < minDistance) {
+            minDistance = distance;
+            nearestFriend = friend;
+        }
+    })
+    console.log(nearestFriend);
+    return nearestFriend;
+
+
+}
+const messages={
+    "Bob":"I'm at Ximen MRT station.",
+    "Mary":"I have a drink near Jingmei MRT station.",
+    "Copper":"I just saw a concert at Taipei Arena.",
+    "Leslie":"I'm at home near Xiaobitan station.",
+    "Vivian":"I'm at Xindian station waiting for you."
+    };
+
+findAndPrint(messages, "Wanlong"); // print Mary
+findAndPrint(messages, "Songshan"); // print Copper
+findAndPrint(messages, "Qizhang"); // print Leslie
+findAndPrint(messages, "Ximen"); // print Bob
+findAndPrint(messages, "Xindian City Hall"); // print Vivian
+
+
+
+
+    </script>
+</body>
+</html>

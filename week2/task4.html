@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4 JS</title>
+</head>
+<body>
+    <script>
+        function getNumber(index){
+            if (typeof getNumber.numbList === 'undefined'){
+                getNumber.numbList = [0];
+            }
+            while (getNumber.numbList.length <= index){
+                
+                if ((getNumber.numbList.length % 3 === 0)) {
+                    nextNumber = getNumber.numbList[getNumber.numbList.length-1] - 1;
+                } else {
+                    nextNumber = getNumber.numbList[getNumber.numbList.length-1] + 4;
+                }
+                getNumber.numbList.push(nextNumber);
+            }
+            console.log(getNumber.numbList[index]);
+            }
+            
+        getNumber(1); // print 4
+        getNumber(5); // print 15
+        getNumber(10); // print 25
+        getNumber(30); // print 70
+    </Script>
+    
+</body>
+</html>

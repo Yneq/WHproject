@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task3</title>
+</head>
+<body>
+    <script>
+        function func(...data){
+    const middleNames = {};
+    data.forEach (name => {
+        const parts = name.split(''); //記得中間沒有空隔，在這裡debug好久Q
+        let middleName ='';
+        
+        if (parts.length === 2){
+            middleName = parts[1];
+        } else if (parts.length === 3 || parts.length === 4){
+            middleName = parts[parts.length - 2];    
+        } else {
+            middleName = parts[2];
+        }
+        if (!(middleName in middleNames)){
+        middleNames[middleName] = name;
+        } else {
+            delete middleNames[middleName];
+        }
+    });
+    const remainingName = Object.values(middleNames);
+    remainingName.length > 0 ? console.log(remainingName[0]) : console.log("沒有");
+
+    }
+
+    func("彭大牆", "陳王明雅", "吳明"); // print 彭大牆
+    func("郭靜雅", "王立強", "郭林靜宜", "郭立恆", "林花花"); // print 林花花 
+    func("郭宣雅", "林靜宜", "郭宣恆", "林靜花"); // print 沒有 
+    func("郭宣雅", "夏曼藍波安", "郭宣恆"); // print 夏曼藍波安
+    </Script>
+</body>
+</html>

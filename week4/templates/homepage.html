@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div>
+    <form id="login_form" class="container" action="/signin" method="post">
+    <h1>歡迎光迎，請輸入帳號密碼</h1>
+    <div class="chekck-in">登入系統</div>
+    <div class="input">帳號<input type="text" name="username"></div>
+    <div class="input">密碼<input type="password" name="password"></div>
+    <div class="checkbox">同意條款<input type="checkbox" id="terms_checkbox"></div>
+    <button class="button">登入</button>
+    </form>
+    <form class="calculate" onsubmit="event.preventDefault(); calculateSquare();">
+    <div class="container">
+    <div class="calcheck-in">計算正整數的平方</div>
+    <div class="input">正整數<input type="number" id="numberInput"></div>
+    <button class="cal-button">計算</button>
+    </form>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
