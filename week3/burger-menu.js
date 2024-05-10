@@ -2,19 +2,31 @@ function toggleMenu() {
     var menuPopup = document.querySelector('#menuPopup');
     menuPopup.classList.toggle('visible');
 }
+<<<<<<< HEAD
 let attractions=[];
 
+=======
+   
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
 document.addEventListener('DOMContentLoaded', function(){
     fetch('https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1')
     .then(function(response){
         return response.json();
     })
     .then(data =>{
+<<<<<<< HEAD
         attractions = data.data.results;
         let promoContainer = document.querySelector('.promotion')
         let bigBoxContainer = document.querySelector('.bigbox-container')
 
         //在這裡清空容器，避免重複內容
+=======
+        let attractions = data.data.results;
+        let promoContainer = document.querySelector('.promotion')
+        let bigBoxContainer = document.querySelector('.bigbox-container')
+
+        //清空容器，避免重複內容
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
         while (promoContainer.firstChild) {
             promoContainer.removeChild(promoContainer.firstChild);
         }
@@ -25,12 +37,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
         for (let i=0; i<3; i++){
             let spot = attractions[i];
+<<<<<<< HEAD
             let element = createSpotElement(spot, 'promo-item');   //function後面設置
+=======
+            let element = createSpotElement(spot, 'promo-item');
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
             promoContainer.appendChild(element);
         }
 
         for (let i=3; i<13; i++){
             let spot = attractions[i];
+<<<<<<< HEAD
             let element = createSpotElement(spot, 'bigframe');   //function後面設置
             bigBoxContainer.appendChild(element);
         }
@@ -78,6 +95,14 @@ function updateBigFrames() {
 
 
 
+=======
+            let element = createSpotElement(spot, 'bigframe');
+            bigBoxContainer.appendChild(element);
+        }
+    });
+});
+
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
 function createSpotElement(spot, className){
     let spotDiv = document.createElement('div');
     spotDiv.className = className
@@ -90,7 +115,11 @@ function createSpotElement(spot, className){
         imageUrl = imageUrl.toLowerCase(); 
         let jpgIndex = imageUrl.indexOf('.jpg'); 
         if (jpgIndex !== -1) {
+<<<<<<< HEAD
             img.src = imageUrl.substring(0, jpgIndex + 4); // 包含.jpg四個字
+=======
+            img.src = imageUrl.substring(0, jpgIndex + 4); // 包含.jpg
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
         }
     }
     img.alt = '這是景點';
@@ -122,7 +151,13 @@ function createSpotElement(spot, className){
         starIcon.className = 'star-icon';
         spotDiv.appendChild(starIcon);
     }
+<<<<<<< HEAD
 
     return spotDiv;
     
+=======
+    
+
+    return spotDiv;
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
 }

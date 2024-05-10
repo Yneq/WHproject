@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import urllib.request as req
 
 def fetch_data(url):
@@ -13,6 +14,22 @@ import bs4
 
     
 def getData(pageurl):
+=======
+import requests
+
+def fetch_data(url):
+    session = requests.Session()
+    headers = {
+        "cookie":"over18=1",
+        "User-Agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+    }
+    response = session.get(url, headers=headers)
+    return response.text
+
+import bs4
+
+def getData(pageurl):    
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
     data = fetch_data(pageurl)
     root = bs4.BeautifulSoup(data, "html.parser")
     titles = root.find_all("div", class_="title")
@@ -41,8 +58,13 @@ def fetch_publish_time(link):       #結果這個找時間弄最久
         publish_time = "No Time" 
     return publish_time
 
+<<<<<<< HEAD
 
 pageurl="https://www.ptt.cc/bbs/Lottery/index.html"
+=======
+pageurl="https://www.ptt.cc/bbs/Lottery/index.html"
+
+>>>>>>> 0d9134397296fc3308b81f0b611989378aff3cf2
 all_titles = []
 count=0
 while count<3:
