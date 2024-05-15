@@ -99,8 +99,8 @@ def signout(request: Request):
     request.session["SIGNED_IN"] = False
     return RedirectResponse(url="/")
 
-@app.post("/creatMessage")
-def creat_message(request: Request, content: str = Form(...), db: mysql.connector.MySQLConnection = Depends(get_db)):
+@app.post("/createMessage")
+def create_message(request: Request, content: str = Form(...), db: mysql.connector.MySQLConnection = Depends(get_db)):
     member_id = request.session.get("member_id")
     if not member_id:
         return RedirectResponse(url="/login", status_code=303)
@@ -116,8 +116,6 @@ def creat_message(request: Request, content: str = Form(...), db: mysql.connecto
 from typing import Optional
 from fastapi.responses import JSONResponse
 
-class DeleteRequest(BaseModel):
-    message_id: Optional[int]  # 如果这个ID可以为空，使用Optional
 
 from fastapi import Body
 
@@ -128,11 +126,9 @@ class DeleteRequest(BaseModel):
 def delete_message(request: DeleteRequest = Body(...), db: mysql.connector.MySQLConnection = Depends(get_db)):
     cursor = db.cursor()
     try:
-        # 確保 SQL 查詢中使用的是正確的參數
         cursor.execute("DELETE FROM message WHERE id = %s", (request.message_id,))
         db.commit()
     except Exception as e:
-        # 加入錯誤處理以便於調試
         return {"error": str(e)}
         
     finally:
@@ -148,6 +144,23 @@ def query_member(request: Request, username: str, db: mysql.connector.MySQLConne
             return JSONResponse(content={"data": member})
         else:
             return JSONResponse(content={"data": None})
+    
+class MemberUpdate(BaseModel):
+    name: str
+
+@app.patch("/api/member")
+def update_member(request: Request, member_update: MemberUpdate, db: mysql.connector.MySQLConnection = Depends(get_db)):
+    if "username" not in request.session:
+        return JSONResponse(status_code=401, content={"error": "Unauthorized"})
+    
+    username = request.session["username"]
+    with db.cursor(dictionary=True) as cursor:
+        cursor.execute("UPDATE member SET name = %s WHERE username = %s", (member_update.name, username))
+        if cursor.rowcount == 0:
+            return JSONResponse(status_code=404, content={"error": "Member not found"})
+        db.commit()
+        request.session["name"] = member_update.name
+        return JSONResponse(content={"ok":True})
         
 
 

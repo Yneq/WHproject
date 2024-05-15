@@ -8,12 +8,12 @@
 </head>
 <body>
     <div class="container">
-    <h1>歡迎光迎，這是會員頁</h1>
-    <div class="chekck-in">{{ message }}，歡迎登入系統</div>
+    <h1>歡迎光臨，這是會員頁</h1>
+    <div class="check-in">{{ message }}，歡迎登入系統</div>
     <a href="/signout">登出系統</a>
     </div>
 
-    <form class="msg_container" action="/creatMessage" method="post">
+    <form class="msg_container" action="/createMessage" method="post">
         <div class="message">快來留言吧</div>
         <div class="input">內容<input type="text" name="content" required></div>
         <button>送出</button>
@@ -35,6 +35,12 @@
         <input id="username_input" type="text" name="content" required>
         <button>查詢</button></div>
         <div id="member_info"></div>
+        <br>
+        <div class="message">更新我的姓名</div>
+        <div class="input">
+        <input id="update_name_input" type="text" name="content" required>
+        <button id="update_name_button">更新</button></div>
+        <div id="renew"></div>
     </div>
     <script defer src="/static/delete_btn.js"></script>
 </body>
